@@ -1,0 +1,23 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū - Staff Page
+{% endblock %}
+{% block content %}
+
+{%if logged_staffName%}
+
+
+<div class="buttonback">
+<br/><br/><br/><br/>
+<h1>hello {{logged_staffName}} !</h1>
+
+    <form action="/admin/staffpage/logout">
+        <button type="submit"  class="btn btn-primary" name="logoutStatus_staff" id="logoutStatus_staff" value="logout">Log Out</button>
+        <br/><br/><br/><br/><br/>    <br/>   
+    </form>
+</div>
+
+
+{%endif%}
+
+{% endblock %}

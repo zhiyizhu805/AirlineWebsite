@@ -1,0 +1,60 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin- Edit Passenger details
+{% endblock %}
+{% block content %}
+
+<div class="signinAdminForm">
+<h1>Edit details</h1>
+<form  action="/admin/staffpage/passenger/edit/process" >
+    <label for="ID">Passenger ID:</label>
+    <input type="number" name="ID" id="ID" value="{{passengerIDSelected}}" disabled/><br/>
+
+    <label for="firstname">First name:</label>
+    <input type="text" name="firstname" id="firstname" value="{{firstname}}" required/><br/>
+
+    <label for="lastname">Last name:</label>
+    <input type="text" name="lastname" id="lastname" value="{{lastname}}" required/><br/>
+
+    <label for="username">User ID(email):</label>
+    <input type="email" name="username" id="username" placeholder="email" value="{{username}}" required/><br/>
+
+    <label for="phone">Phone number:</label>
+    <input type="tel" name="phone" id="phone" placeholder="(000)000-0000" value="{{phone}}" required/><br/>
+
+    <label for="passport">Passport number:</label>
+    <input type="text" name="passport" id="passport" value="{{passport}}" required/><br/>
+
+    <label for="DOB">Date of birth:</label>
+    <input type="date" name="DOB" id="DOB" value="{{DOB}}" required/><br/>
+
+    <p class="successmessage">
+        {%if success_message%}
+        {{success_message}}
+        {%endif%}
+    </p>
+    <div class="buttonback">
+        <button type="submit"  class="btn btn-primary" name="flightIDEach" id="flightIDEach" value="{{flightIDEach}}"/>Edit</button><br/>
+    </div>
+</form>
+</div>
+        
+{%if flightIDEach!="None"%}
+<div class="buttonback" >
+    <form action="/admin/staffpage/flights/each">
+        <button class="btn btn-outline-primary " type="submit" name="flightIDEach" value="{{flightIDEach}}">Back to Flight {{flightIDEach}} Page</button>
+    <form>
+</div>
+{%endif%}
+
+{%if flightIDEach=="None"%}
+<div class="buttonback">
+<a href="/admin/staffpage/passenger/each?selectedPassengerID={{passengerIDSelected}}"><button class="btn btn-outline-primary ">Back to Last Page</button></a>
+</div>
+{%endif%}  
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}
+Air Whakatū - Sign in 
+{% endblock %}
+{% block content %}
+
+<div class="login-page">
+  <div class="form">
+    <form action="/mypage" method="POST" class="login-form">
+    <h1>Sign in</h1>
+    <div >
+      <label for="username" >User ID:</label><br/>
+      <input  type="email" name="username" id="username" placeholder="email" required/><br/>
+      {%if error_message %}
+      <p class="errormessage">{{error_message}}</p>
+      {% endif %}
+      <button type="submit" name="submit" id="submit" >Log in</button><br/>
+      <p class="message">Don't have an account?<a href="/register">Creat one</a></p>
+    </form>
+  </div>
+</div>
+{% endblock %} 

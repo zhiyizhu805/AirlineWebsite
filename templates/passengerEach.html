@@ -1,0 +1,69 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin - Manage Passenger
+{% endblock %}
+{% block content %}
+
+
+
+<p class="successmessage">
+    {%if success_message%}
+    {{success_message}}
+    {%endif%}
+</p>
+
+
+<fieldset>
+    <h2 class="header_form">Passenger List</h2>
+    <table class="table table-striped ">
+        <thead class="table-light">
+            <tr>
+                {%for col in dbcols%}
+                    <th>{{col}}</th>
+                {%endfor%}
+                <th>Edit details</th>
+                <th>Booking</th>
+            </tr>
+        </thead>
+    <tbody>
+        {%for result in dbresult%}
+        <tr>
+            {%for entry in result%}
+                <td>{{entry}}</td>
+            {%endfor%}
+            <td>
+                <form action="/admin/staffpage/passenger/edit">
+                    <button type="submit"  class="btn btn-primary buttonwidth" id="passengerIDeach" name="passengerIDeach" value="{{result[0]}}">Edit</button> 
+                    <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">
+                </form>
+            </td>
+            <td>
+                <form action="/admin/staffpage/passenger/booking">
+                    <input type="hidden" name="passengerName" value="{{result[1]}}">
+                    <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">
+                    <button type="submit" class="btn btn-primary buttonback"  id="selectedPassengerID" name="selectedPassengerID" value="{{result[0]}}">Manage Booking</button> 
+                </form>
+            </td>
+        
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</fieldset>
+
+
+{%if flightIDEach=="None"%}
+<div class="buttonback">
+    <a href="/admin/staffpage/passenger"><button class="btn btn-outline-primary">Back to Passenger List</button></a>
+<div>
+{%else%}
+<div class="buttonback">
+    <a href="http://127.0.0.1:5000/admin/staffpage/flights/each?flightIDEach={{flightIDEach}}"><button class="btn btn-outline-primary">Back to Flight {{flightIDEach}} Page</button></a>
+</div>
+{%endif%}
+
+
+
+
+
+{% endblock %}

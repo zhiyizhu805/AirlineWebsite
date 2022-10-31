@@ -1,0 +1,81 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin- Edit Flight ID:{{flightIDEach}}
+{% endblock %}
+{% block content %}
+
+
+
+<div class="FormAddaflight">
+    <h2>Edit Flight Details</h2>
+<form {%if loggedstaffIsManager == 1%}
+            action="/admin/staffpage/editflights/process" 
+      {%endif%} 
+      {%if loggedstaffIsManager== 0 %} 
+            action="/admin/staffpage/editflights/process/class0" 
+      {%endif%}>
+
+<label for="flightID">Flight ID:</label>
+<input type="number" name="flightID" value="{{flightIDEach}}" disabled><br/>
+
+<label for="flightNum">Flight Number:</label>
+<select name="flightNum" id="flightNum" {{disabled}}  required>
+    {%for a in  dbresult_flightnum%}
+    <option value="{{a[0]}}" {%if a[0]|upper==flightNum|upper %}{{selected}} {%endif%} >{{a[1]}}</option>
+    {%endfor%}
+    
+</select>
+<br/>
+
+<label for="flightDate">Flight Date:</label>
+<input type="date" name="flightDate" id="flightDate"  value="{{flightDate}}" {{disabled}} required/><br/>
+
+<label for="scheduledDepTime">Scheduled Departure Time:</label>
+<input type="time" name="scheduledDepTime" id="scheduledDepTime"  value="{{scheduledDepTime}}"  {{disabled}} required/><br/>
+
+<label for="scheduledArrTime">Scheduled Arrival Time:</label>
+<input type="time" name="scheduledArrTime" id="scheduledArrTime" value="{{scheduledArrTime}}"  {{disabled}} required/><br/>
+
+    
+<label for="actdeptime">Est/Act Departure Time:</label>
+<input type="time" name="actdeptime" id="actdeptime" value="{{actdeptime}}" /><br/>
+
+<label for="actarrtime">Est/Act Arrival Time:</label>
+<input type="time" name="actarrtime" id="actarrtime"  value="{{actarrtime}}"   /><br/>
+
+<label for="flightStatus">Flight Status:</label>
+<select name="fligtStatus" id="flightStatus" required  >
+    {%for result_flightstatus in dbresult_flightstatus%}
+        {%for z in  result_flightstatus%}
+    <option value="{{z}}"{% if z|upper == flightStatus|upper %}  {{selected}} {%endif%} >{{z}}</option>
+    {%endfor%}
+    {%endfor%}
+</select><br/>
+
+
+<label for="aircraft">Aircraft:</label>
+<select name="aircraft" id="aircraft"  {{disabled}}  required  >
+    {%for result in dbresult_regmark%}
+        {%for entry in result%}
+    <option value="{{entry}}" {%if entry|upper == aircraft|upper%} {{selected}} {%endif%}>{{entry}}</option>
+    {%endfor%}
+    {%endfor%}
+</select><br/><br/><br/>
+
+
+
+    <div class="buttonback">
+        <button  class="btn btn-primary buttonback"  type="submit" id="flightIDEach" name="flightIDEach" value="{{flightIDEach}}">Edit</button> 
+    </div>
+    <br/>
+
+</form>
+</div>
+
+
+<div class="buttonback" >
+    <form action="/admin/staffpage/flights/each">
+        <button class="btn btn-outline-primary " type="submit" name="flightIDEach" value="{{flightIDEach}}">Back to Flight {{flightIDEach}} Page</button>
+    <form>
+</div>
+{% endblock %}

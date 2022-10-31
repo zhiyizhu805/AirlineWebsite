@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}
+Air Whakatū - My Page
+{% endblock %}
+{% block content %}
+
+{%if loggedFirstname%}
+
+<div class="buttonback">
+<br/><br/><br/><br/>
+<h1>hello {{loggedFirstname}} !</h1>
+
+    <form action="/logout">
+        <button type="submit" name="logoutStatus" value="logout" class="btn btn-primary">Log out</button>
+    </form>
+</div>
+
+{%endif%}
+
+{% endblock %}

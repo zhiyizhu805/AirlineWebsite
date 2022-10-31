@@ -1,0 +1,43 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin -Add next week Flights
+{% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container text-center">
+        <form action="/admin/staffpage/addflights/nextweek">
+        <div class="buttonback addflightbutton">
+        <label>Create Week{{weeknumMaxNextweek}} Flight Schedule:</label>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+        </form>
+    </div>
+</div>
+<br/><br/>
+
+<div class="container-fluid ">
+    <h2>Week {{weekNumMax}} Flight Schedules(the latest)</h2>
+<fieldset>
+    <table class="table table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                {%for q in dbcols_flightsByWeek%}
+                    <th>{{q}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for e in dbresult_flightsByWeek%}
+        <tr>
+            {%for w in e%}
+                <td>{{w}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</fieldset>
+</div>
+
+{% endblock %}

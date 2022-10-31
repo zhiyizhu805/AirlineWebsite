@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block title %}
+Air Whakatū - Edit my details
+{% endblock %}
+{% block content %}
+<div class="login-page class="row g-3"">
+    <div class="form">
+        <h1>Edit my details</h1>
+        <form  action="/editdetails/process" method="POST" class="register-form">
+        <div class="row mb-3">
+            <label for="firstname"  class="col-sm-3 col-form-label">First name:</label><br/>
+            <div class="col-sm-9"> 
+            <input type="text" name="firstname" id="firstname" value="{{firstname}}" required/><br/>
+            </div>
+        </div>
+        <div class="row mb-3">    
+            <label for="lastname"  class="col-sm-3 col-form-label">Last name:</label><br/>
+            <div class="col-sm-9"> 
+            <input type="text" name="lastname" id="lastname" value="{{lastname}}" required/><br/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="username" class="col-sm-3 col-form-label">User ID(email):</label><br/>
+            <div class="col-sm-9"> 
+            <input type="email" name="username" id="username" placeholder="email" value="{{username}}" required/><br/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="phone" class="col-sm-3 col-form-label">Phone number:</label><br/>
+            <div class="col-sm-9"> 
+            <input type="tel" name="phone" id="phone" placeholder="(000)000-0000" value="{{phone}}" required/><br/>
+        </div>
+    </div>
+    <div class="row mb-3">
+            <label for="passport"  class="col-sm-3 col-form-label">Passport number:</label><br/>
+            <div class="col-sm-9">
+            <input type="text" name="passport" id="passport" value="{{passport}}" required/><br/>
+        </div>
+    </div>
+    <div class="row mb-3">
+            <label for="DOB" class="col-sm-3 col-form-label">Date of birth:</label><br/>
+            <div class="col-sm-9">
+            <input type="date" name="DOB" id="DOB" value="{{DOB}}" required/><br/>
+        </div>
+    </div>
+            <p class="errormessage errormessage">
+                {%if error_message%}
+                {{error_message}}
+                {%endif%}
+            </p>
+            <button type="submit" name="submit" id="submit" value="Edit">Edit</button>
+</div>
+</div>         
+<div class="buttonback">
+    <a href="/mydetails"><button class="btn btn-outline-primary ">Back</button></a>
+    </div>  
+
+
+{% endblock %}

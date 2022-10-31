@@ -1,0 +1,21 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū - Admin Log In
+{% endblock %}
+{% block content %}
+<div class="login-page adminlogin">
+    <div class="form">
+        <h1>Log In(staff)</h1>
+        <form action="/admin/staffpage" method="POST" class="login-form">
+        <label for="staffID">Select your name:</label>
+        <select name="staffID" id="staffID" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            {%for result in dbresult%}
+            <option value={{result[0]}}>{{result[1]}} {{result[2]}}</option>
+            {%endfor%}
+        </select>
+        <button type="submit" value="login">Log in</button>
+     </form>
+    </div>
+</div>
+{% endblock %}
+

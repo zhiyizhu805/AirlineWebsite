@@ -1,0 +1,90 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin- Flight ID:{{flightIDEach}}
+{% endblock %}
+{% block content %}
+
+
+
+
+<fieldset>
+    <h4 class="header_form">Flight-{{flightIDEach}} Details</h6>
+    <table class="table table-hover table-striped">
+        <thead class="table-light ">
+            <tr>
+                {%for col in dbcols%}
+                    <th>{{col}}</th>
+                {%endfor%}
+                <th>Edit</th>
+            </tr>
+        </thead>
+    <tbody>
+        {%for result in dbresult%}
+        <tr>
+            {%for entry in result%}
+                <td>{{entry}}</td>
+            {%endfor%}
+            <td><form action="/admin/staffpage/editflights">
+                <button type="submit" id="flightIDEach" name="flightIDEach" value="{{flightIDEach}}" class="btn btn-primary">Edit</button> 
+            </form></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+ 
+    <p class="errormessage">
+        {%if error_message%}
+        {{error_message}}
+        {%endif%}
+    </p>
+
+    <fieldset>
+        <h4 class="header_form">Flight-{{flightIDEach}} Passenger List</h6>
+        <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>Number</th>
+                    {%for col in dbcols_Plist%}
+                        <th>{{col}}</th>
+                    {%endfor%}
+                    <th>Edit details</th>
+                    <th>Booking</th>
+                </tr>
+            </thead>
+        <tbody>
+            <tr>
+            
+            {%for result in dbresult_Plist%}
+              <td>{{loop.index}}</td>
+                {%for entry in result%}
+                    <td>{{entry}}</td>
+                {%endfor%}
+                <td>
+                    <form action="/admin/staffpage/passenger/edit">
+                        <input type="hidden" name="flightIDEach" value="{{flightIDEach}}"/>
+                        <button type="submit" id="passengerIDeach" name="passengerIDeach" value="{{result[0]}}" class="btn btn-outline-primary">Edit</button> 
+                    </form>
+                </td>
+                <td>
+                    <form action="/admin/staffpage/passenger/booking">
+                        <input type="hidden" name="passengerName" value="{{result[1]}}"/>
+                        <input type="hidden" name="flightIDEach" value="{{flightIDEach}}"/>
+                        <button type="submit" id="selectedPassengerID" name="selectedPassengerID" value="{{result[0]}}" class="btn btn-outline-primary">View Booking</button> 
+                    </form>
+                </td>
+            </tr>
+            {%endfor%}
+    
+        </tbody>
+        </table>
+    </fieldset>   
+
+
+<div class="buttonback">
+<a href="/admin/staffpage/flights" > <button  class="btn btn-outline-primary">Back to Flight List</button></a>
+</div>
+</fieldset>
+
+
+{% endblock %}

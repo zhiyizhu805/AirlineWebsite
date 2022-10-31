@@ -1,0 +1,112 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin - Manage Passenger
+{% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container text-center" >
+        <fieldset class="searchform">
+            <form action="/admin/staffpage/passenger/process">
+                <label for="passengerName">Search by Last Name:</label>    
+                <input list="passengerList" name="passengerName" id="passengerName">
+                <datalist id="passengerList">
+                    {%for nameList in dbresult_passengerLastname%}
+                    <option value={{nameList[0]}}>
+                    {%endfor%}  
+                </datalist>
+                <button type="submit" class="btn btn-primary">Continue</button>
+            </form>
+    </div>
+</div>
+<p class="successmessage">
+    {%if success_message%}
+    {{success_message}}
+    {%endif%}
+</p>
+
+
+{%if not LastnameInput%}
+<div class="container-fluid">
+<fieldset>
+    <h2>Passenger List</h2>
+    <table class="table table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                {%for col in dbcols%}
+                    <th>{{col}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for result in dbresult%}
+        <tr>
+                <td>{{result[0]}}</td>
+                <td>
+                    <form action="/admin/staffpage/passenger/each">
+                        <button type="submit"name="selectedPassengerID" value={{result[0]}}  class="namebutton btn btn-outline-secondary">
+                            
+                            {{result[1]}}
+                           
+                        </button>
+                    <form>
+                </td> 
+                <td>{{result[2]}}</td>
+                <td>{{result[3]}}</td>
+                <td>{{result[4]}}</td>
+                <td>{{result[5]}}</td>
+                <td>{{result[6]}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</fieldset>
+{%endif%}
+
+
+{%if LastnameInput%}
+<fieldset>
+    <h2>Passenger List</h2>
+    <p>Rusult for Lastname starts with " {{LastnameInput}} "</p>
+    <table class="table table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                {%for a in dbcols_filter%}
+                    <th>{{a}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for b in dbresult_filter%}
+        <tr>
+            <td>{{b[0]}}</td>
+            <td>
+                <form action="/admin/staffpage/passenger/each">
+                    <button type="submit"name="selectedPassengerID" value={{b[0]}}  class="namebutton btn btn-outline-secondary">
+                        
+                        {{b[1]}}
+                       
+                    </button>
+                <form>
+            </td> 
+            <td>{{b[2]}}</td>
+            <td>{{b[3]}}</td>
+            <td>{{b[4]}}</td>
+            <td>{{b[5]}}</td>
+            <td>{{b[6]}}</td>
+    </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</fieldset>
+</div>
+
+{%endif%}
+
+
+
+
+
+
+
+{% endblock %}

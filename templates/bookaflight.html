@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block title %}
+Air Whakatū - Book A Flight
+{% endblock %}
+{% block content %}
+
+
+<div class="jumbotron">
+    <div class="container text-center" >
+        <fieldset class="searchform ">
+            <form action="/bookaflight/process" id="bookaflightform">
+                <h2 class="title-bookflight">Book Your Flights<i class="bi bi-airplane"></i></h2>
+                <label for="departureAirport">Departure Airport:</label>
+                <select name="departureAirport" id="departureAirport" required >
+                    {%for value in dbresult_airport_list%}
+                        <option value="{{value[0]}}" {%if value[0]==DepAirportSelected%}selected{%endif%}>{{value[1]}}</option>
+                     {%endfor%}
+                </select>
+            
+                <label for="dateSelected">Date:</label>
+                <input type="date" name="dateSelected" id="dateSelected" {%if dateSelected%} value="{{dateSelected}}" {%else%} value="{{CurrentDate}}" {%endif%} min="{{CurrentDate}}" required >
+                <button type="submit" class="btn btn-primary book">Submit</button>
+            
+            </form>
+        </fieldset>
+    </div>
+  </div>
+
+{%if dbresult!=[] %}
+    <div class="container-fluid">
+    {%if DepAirportSelected and dateSelected%}
+    <br/><br/>
+    <table class="table table-hover table-striped ">
+        <thead class="table-light">
+            <tr>
+                {%for columns in dbcols%}
+                    <th scope="col">{{columns}}</th>
+                {%endfor%}
+                    <th scope="col">Book</th>
+            </tr>
+        </thead>
+    <tbody >
+        {%for result in dbresult%}
+        <tr>
+            {%for flights in result%}
+                <td>{{flights}}</td>
+        {%endfor%}
+            <td>
+                <form action="/bookbutton">
+                    
+                    <button  type="submit" id="flightID_seatNum" name="flightID_seatNum"  class="btn btn-primary"
+                    value="{{result[0]}},{{result[-1]}}" onclick="return confirm('Book in Flight-{{result[0]}}?')"
+                    {%if result[-1]<=0  or result[-2]=="Cancelled"%}
+                        disabled
+                    {%endif%}  >
+                    {%if result[-2]=="Cancelled"%}
+                    Cancelled
+                    {%else%}
+                        {%if result[-1]<=0  %}
+                        Fully Booked
+                        {%else%}
+                        Book
+                        {%endif%}
+                    {%endif%}
+                               </button> 
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+
+    <div class="buttonback ">
+        <a href="/bookaflight"><button class="btn btn-outline-primary ">Back</button></a>
+    </div>
+        
+    {%endif%}
+
+{%else%}
+<div class="notice">
+<h5 class="errormessageOnlyColor">Sorry! We don't have Flight Schedules for {{DepAirportSelected}} in {{dateSelected}}.</h5>
+<br/>
+<br/>
+<div class="buttonback">
+    <a href="/bookaflight"><button class="btn btn-outline-primary ">Back</button></a>
+</div>
+{%endif%}
+
+</div>
+{% endblock %}

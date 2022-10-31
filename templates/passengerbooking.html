@@ -1,0 +1,95 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin - Manage Passenger Booking
+{% endblock %}
+{% block content %}
+
+
+<fieldset>
+    <h2 class="header_form">Passenger Booking</h2>
+    <h6 class="header_form">Passenger ID: {{passengerIDeach}}<br/>Passenger Name: {{passengerName}} </h6>
+    <p class="errormessage">
+        {%if error_message!="None"%}
+        {{error_message}}
+        {%endif%}
+    </p>
+    <p class="successmessage">
+        {%if success_message!="None"%}
+        {{success_message}}
+        {%endif%}
+    </p>
+
+
+    <table class="table table-hover table-striped">
+        <form   action="/admin/staffpage/flights" >
+            <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">            
+            <input type="hidden" name="passengerName" value="{{passengerName}}">
+            <div class="buttonback">
+            <button  class="btn btn-outline-danger"  type="submit" id="passengerIDeach" name="passengerIDeach" value="{{passengerIDeach}}">＋ Add Flight</button> 
+            </div>
+        </form>
+        <br/>
+        {%if dbresult[0][0]!=None %}
+        <thead class="table-light">
+            <tr>
+                {%for col in dbcols%}
+                    <th>{{col}}</th>
+                {%endfor%}
+                <th>Cancel</th>
+                <th>Change</th>
+            </tr>
+        </thead>
+    <tbody>
+        {%for result in dbresult%}
+        <tr>
+            {%if result[0]!=None%}
+            {%for entry in result%}
+                <td>{{entry}}</td>
+            {%endfor%}
+            <td>
+                <form action="/admin/staffpage/passenger/booking/cancel">
+
+                    <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">
+                    <input type="hidden" name="passengerName" value="{{passengerName}}">
+                    <input type="hidden" name="passengerIDeach" value="{{passengerIDeach}}">
+                    <button type="submit"  class="btn btn-primary"  id="flightID" name="flightID" value="{{result[0]}}" onclick="return confirm('Cancel Flight-{{result[0]}}?')">Cancel</button> 
+                </form>
+            </td>
+            <td>
+                <form action="/admin/staffpage/flights">
+                    <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">
+                    <input type="hidden" name="passengerIDeach" value="{{passengerIDeach}}">
+                    <input type="hidden" name="passengerName" value="{{passengerName}}">
+                    <button type="submit" class="btn btn-primary"  id="originalFlightID" name="originalFlightID" value="{{result[0]}}">Reschedule</button> 
+                </form>
+            </td>
+            {%endif%}
+
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+
+{%else%}
+<hr/>
+<div class="notice errormessageOnlyColor">
+    <h5 >No booked filghts currently.</h5>
+</div>
+{%endif%}
+</fieldset>
+ 
+
+{%if flightIDEach =="None"%}
+<div class="buttonback">
+    <a href="/admin/staffpage/passenger/each?selectedPassengerID={{passengerIDeach}}"><button class="btn btn-outline-primary">Back to Passenger {{passengerIDeach}} Page</button></a>
+</div>
+{%else%}
+<div class="buttonback">
+    <a href="/admin/staffpage/flights/each?flightIDEach={{flightIDEach}}"><button class="btn btn-outline-primary">Back to Flight {{flightIDEach}} </button></a>
+</div>
+{%endif%}
+
+
+
+
+{% endblock %}

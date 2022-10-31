@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block title %}
+Air Whakatū - Register
+{% endblock %}
+{% block content %}
+<div class="login-page ">
+    <div class="form">
+
+       <form action="/register/checkvalid" method="POST" class="register-form">
+        <h1>Register</h1>
+        <div class="errormessage">
+            <p >
+                {%if error_message%}
+                {{error_message}}
+                {%endif%}
+            </p>
+        </div>
+        <div class="successmessage">
+            <p > 
+                {%if success_message%}
+                {{success_message}}
+                {%endif%}
+            </p>
+        </div>
+    <div class="row mb-3">
+        <label for="username"  class="col-sm-3 col-form-label">User ID:</label><br/>
+        <div class="col-sm-9"> 
+        <input type="email" name="username" id="username" placeholder="email" required/><br/>
+    </div>
+        </div>
+    <div class="row mb-3">    
+        <label for="firstname" class="col-sm-3 col-form-label">First name:</label><br/>
+        <div class="col-sm-9"> 
+        <input type="text" name="firstname" id="firstname" required/><br/>
+    </div>
+        </div>
+   <div class="row mb-3">
+        <label for="lastname" class="col-sm-3 col-form-label">Last name:</label><br/>
+        <div class="col-sm-9">
+        <input type="text" name="lastname" id="lastname" required/><br/>
+    </div>
+        </div>
+    <div class="row mb-3">
+        <label for="phone" class="col-sm-3 col-form-label">Phone number:</label><br/>
+        <div class="col-sm-9">
+        <input type="tel" name="phone" id="phone" placeholder="(000)000-0000" required/><br/>
+    </div>
+        </div>
+    <div class="row mb-3">
+        <label for="passport" class="col-sm-3 col-form-label">Passport number:</label><br/>
+        <div class="col-sm-9">
+        <input type="text" name="passport" id="passport" required/><br/>
+    </div>
+        </div>
+    <div class="row mb-3">
+        <label for="DOB" class="col-sm-3 col-form-label">Date of birth:</label><br/>
+        <div class="col-sm-9">
+        <input type="date" name="DOB" id="DOB" required/><br/>
+    </div>
+        </div>
+        <button type="submit" name="submit" id="submit" value="creat"/>Create</button><br/>
+
+
+        Already have an account?<a href="/signin">Sign in</a>
+        </form>
+</div>
+</div>
+{% endblock %} 

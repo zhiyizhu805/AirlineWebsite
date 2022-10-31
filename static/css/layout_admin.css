@@ -1,0 +1,385 @@
+/* Air Whakatū logo: 685x104 pixels */
+header img {
+    display: block;
+    width: 685px;
+    height: 104px;
+    margin: 0px;
+ }
+ /* background colour: #3a5dff or rgb(23,37,100) */
+.header_logo{
+    background-color:#3a5dff ;
+ }
+
+.nav_login_admin{
+    display: block;
+    float: right;
+    clear: both;
+
+}
+
+.award-logo{
+  display: block;
+  float: left;
+  height: 28px;
+  width: 23px;
+  margin-right: 15px;
+}
+
+.dropdown-menu li{
+  text-align: center;
+}
+
+.waringMessage{
+    color:red;
+    text-align:right;
+ }
+
+.header_form{
+    text-align: center;
+}
+
+
+#signinform{
+    background-color:#fefefe;
+    font-size:larger;
+    border: none;
+    margin:18px 0px 10px 29%;
+    width: 40%;
+ }
+
+
+.login-page {
+    width: 545px;
+    padding: 2.5% 0 0;
+    margin: auto;
+    text-align: left;
+  }
+
+.login-page h1{
+  margin-bottom:0.8em;
+  text-align: center;
+}
+
+.adminlogin select{
+  height: auto;
+}
+h1,h2,h4,p{
+  text-align: center;
+}
+
+.form {
+    width:545px;
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    /* display: block;
+    float:left; */
+  }
+
+  .form label{
+    text-align:left;
+    /* display:block;
+    float:left;
+    clear:left;
+    font-size: 0.9em;
+    width: 25%;
+    margin:7px 4% 7px 5px  */
+  }
+ 
+.form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+  }
+.form .message a {
+    color: #3a5dff;
+    text-decoration: none;
+  }
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+.container:before, .container:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+.container .info {
+    margin: 50px auto;
+    text-align: center;
+  }
+.container .info h1 {
+    margin: 0 0 15px;
+    padding: 0;
+    font-size: 36px;
+    font-weight: 300;
+    color: #1a1a1a;
+  }
+.container .info span {
+    color: #4d4d4d;
+    font-size: 12px;
+  }
+.container .info span a {
+    color: #000000;
+    text-decoration: none;
+  }
+.container .info span .fa {
+    color: #EF3B3A;
+  }
+body {
+    background: linear-gradient(90deg,white 0%, white 50%);
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;    
+
+    /* text-align: center;
+    */
+    /* background-size:cover ; 
+    background-position:center ; 
+    background-attachment:fixed */
+
+  }
+
+
+.searchform form{
+  padding:30px;
+  /* background:url('/static/b1274459.jpeg');  */
+  text-align: center;
+}
+
+
+/* page arrdep */
+
+.jumbotron{
+  height: 150px;
+  background-color: silver;
+  margin-top:-30px;
+}
+
+.jumbotron fieldset{
+  padding-top: 2%;
+}
+
+.jumbotron label{
+  font-size: 18px;
+
+}
+
+.jumbotron select,input{
+  height:40px;
+  text-align: center;
+  border-radius: 8px;
+}
+/* Button */
+ 
+
+
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #3a5dff;
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form button:hover,.form button:active,.form button:focus {
+  background: #3a5dff;
+} 
+
+.futherbutton{
+  display: block;
+  float: right;
+  clear: both;
+
+}
+
+button{
+height: auto;
+width: auto;
+}
+
+
+button a{
+  text-decoration: none;
+}
+
+.buttonback{
+
+text-align: center;
+width: auto;
+
+}
+
+  
+
+.namebutton{
+  width: 180px;
+}
+
+
+.buttonflightfilter{ 
+   text-align: center;
+   padding-top: 30px;
+   height: 80px;
+}
+
+.buttonFlightID{
+  width: 65px;
+  font-size: 15px;
+}
+
+.buttonwidth{
+  width: auto
+}
+
+
+/* notice */
+.notice {
+    text-align: center;
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+
+
+/* flightAdmin */
+#flightFilter{
+    background-color: silver;
+    margin-top: -30px;
+    margin-bottom: 15px;
+    padding-top: 45px;
+    height: auto;
+}
+
+#filterframe{margin-left: 13%;}
+
+#flightFilter label{
+  width: 160px;
+}
+
+#flightFilter input,select{
+  width: 280px;
+  margin-bottom: 15px;
+  height: 35px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+table{
+   text-align: center;
+   font-size: 14px;
+
+}
+
+.signinAdminForm {
+  width: 600px;
+  padding: 60px;
+  margin: auto;
+}
+
+.signinAdminForm label{
+  width: 150px;
+
+}
+
+.signinAdminForm input{
+  width: 300px;
+  margin-top: 12px;
+
+}
+
+/* #addflightbutton{
+  margin-top: -70px;
+} */
+
+.addflightbutton{
+  padding-top: 65px
+}
+
+/* For add a flight input box */
+.FormAddaflight{
+  margin: auto;
+  width: fit-content;
+  height: auto;
+}
+
+.FormAddaflight label{
+  width: 200px;
+
+}
+
+.FormAddaflight input,.FormAddaflight select{
+  width: 200px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+
+/* notice message */
+.errormessage{
+  color:red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.errormessageOnlyColor{
+  color:red;
+}
+
+.successmessage{
+  color:green;
+  font-size: 15px;
+  text-align: center;
+}
+
+/* homepage pic */
+.bgimage{
+  text-align: center;
+  display: block;
+  width: 560px;
+  margin: auto;
+  margin-top: 3%;
+}
+
+/* Footer */
+footer{
+
+  text-align: center;
+  position: relative;
+  bottom: 0px;
+ 
+
+}
+
+/* .title{
+
+} */
+
+/* 想把hover颜色改成白色 */
+.btn-outline-primary {
+  --bs-btn-hover-color: white;
+  }

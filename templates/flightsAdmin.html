@@ -1,0 +1,183 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin - Flights 
+{% endblock %}
+{% block content %}
+<div id="flightFilter">
+    <form action="/admin/staffpage/flights" id="filterframe">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="dateStart" >Start-date :</label>    
+                <input type="date" name="dateStart" id="dateStart" value="{{startDate}}">
+            </div>
+            <div class="col-md-6">
+                <label for="dateEnd" >End-date :</label>  
+                <input type="date" name="dateEnd" id="dateEnd" value="{{endDate}}">
+            </div>
+        </div>
+        <div class="row g-3 ">
+            <div class="col-md-6">
+                <label for="DepAirport" >Departure Airport</label>
+                <select name="DepAirport" id="DepAirport" >
+                        <option value="">All Airports</option>
+                        {%for airport_list in dbresult_airport_list%}
+                        <option value="{{airport_list[0]}}" {%if airport_list[0]==DepAirport%}selected{%endif%}>{{airport_list[1]}}</option>
+                        {%endfor%}
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="ArrAirport">Arrival Airport</label>
+                <select name="ArrAirport" id="ArrAirport" >
+                    <option value="">All Airports</option>
+                        {%for airport_list in dbresult_airport_list%}
+                    <option value="{{airport_list[0]}}" {%if airport_list[0]==ArrAirport%}selected{%endif%}>{{airport_list[1]}}</option>
+                        {%endfor%}
+                </select>
+            </div>
+        </div>
+
+        <div class="row g-3 ">
+            <div class="col-md-4 offset-md-3">
+                <div class="buttonflightfilter">
+                    <button type="submit" class="btn btn-primary ">Continue</button>
+                </div>
+            </div>
+        </div>
+
+
+            {%if passengerIDeach!=None%}
+            <input type="hidden" name="passengerIDeach" value="{{passengerIDeach}}">
+            {%endif%}
+
+            {%if flightIDEach =="None"%}
+            <input type="hidden" name="flightIDEach" value="">
+            {%endif%}
+            {%if flightIDEach !="None"%}
+            <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">
+            {%endif%}
+            <input type="hidden" name="passengerName" value="{{passengerName}}">
+
+    </form>
+
+</div>
+
+
+
+{%if dbresult_filter!=[] %}
+<div class="container-fluid">
+<fieldset>
+    <h2>Flight List </h2>
+    <p>Click button to check the Flight manifest</p>
+
+    <table class="table table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                {%for a in dbcols_filter%}
+                    <th>{{a}}</th>
+                {%endfor%}
+                {%if passengerIDeach!=None %}
+                    <th>{%if originalFlightID!=None%} 
+                        Reschedule flights
+                        {%endif%}  
+
+                        {%if originalFlightID==None%}
+                        Add flights
+                        {%endif%}  </th>
+                {%endif%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for b in dbresult_filter%}
+        <tr>
+            <td>
+                <form action="/admin/staffpage/flights/each">
+                    <button type="submit" class="buttonFlightID btn btn-outline-primary" name="flightIDEach" id="flightIDEach" value={{b[0]}}  {%if passengerIDeach!=None%} disabled {%endif%} >
+                        {{b[0]}}
+                    </button>
+                </form>
+            </td> 
+            <td>{{b[1]}}</td>
+            <td>{{b[2]}}</td>
+            <td>{{b[3]}}</td>
+            <td>{{b[4]}}</td>
+            <td>{{b[5]}}</td>
+            <td>{{b[6]}}</td>
+            <td>{{b[7]}}</td>
+            <td>{{b[8]}}</td>
+            <td>{{b[9]}}</td>
+            <td>{{b[10]}}</td>
+            <td>{{b[11]}}</td>
+            <td>{{b[12]}}</td>
+            <td>{{b[13]}}</td>
+            {%if passengerIDeach!=None%}
+            <td>
+                <form action="/admin/staffpage/passenger/booking/addPassengerflightProcess">
+                    {%if flightIDEach =="None"%}
+                    <input type="hidden" name="flightIDEach" value="None">
+                    {%else%}
+                    <input type="hidden" name="flightIDEach" value="{{flightIDEach}}">
+                    {%endif%}
+                    <input type="hidden" name="passengerName" value="{{passengerName}}">
+                    <input type="hidden" name="passengerIDeach" value="{{passengerIDeach}}">
+                    <input type="hidden" id="flightID" name="flightID" value="{{b[0]}}" >
+                    <input type="hidden" id="originalFlightID" name="originalFlightID" value="{{originalFlightID}}" >
+                    
+                    <button type="submit" id="flightID_seatNum" name="flightID_seatNum" 
+                    value="{{b[0]}},{{b[-1]}}"  class="btn btn-primary"
+                    {%if originalFlightID!=None%} onclick="return confirm('Reschedule to Flight-{{b[0]}} for passenger-{{passengerName}} ?')"{%endif%} 
+                    {%if originalFlightID==None%} onclick="return confirm('Book passenger-{{passengerIDeach}} in Flight-{{b[0]}}?')"{%endif%}            
+                          
+                    {%if b[-1]<=0  or b[-4]=="Cancelled" %}
+                        {{disabled}}
+                    {%endif%}  >
+                            {%if b[-4]=="Cancelled"%}
+                            Cancelled
+                            {%endif%}
+                            {%if b[-4]!="Cancelled"%}
+                                {%if b[-1]<=0  %}
+                                    
+                                    {%if b[-4]!="Cancelled"%}
+                                    Fully Booked
+                                    {%endif%}
+
+                                {%endif%}
+
+                                {%if b[-1]>0  %}   
+                                    {%if originalFlightID!=None%} 
+                                    Reschedule 
+                                    {%endif%}  
+
+                                    {%if originalFlightID==None%}
+
+                                    Book
+
+                                    {%endif%}  
+                                {%endif%}
+                            {%endif%}
+                                                        </button> 
+                
+
+                </form>
+            </td>
+            {%endif%}
+    </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</fieldset>
+
+<div class="buttonback">
+    <button class="btn btn-outline-primary"><a href="/admin/staffpage/flights">Back</a></button>
+</div>
+{%else%}
+
+<div class="notice">
+    <h5 class="errormessageOnlyColor">Sorry! No Flight Schedules in this period.</h5>
+</div>
+
+    <div class="buttonback">
+       <a href="/admin/staffpage/flights"> <button class="btn btn-outline-primary">Back</button></a>
+    </div>
+</div>
+{%endif%}
+{% endblock %}

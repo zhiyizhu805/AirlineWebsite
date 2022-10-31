@@ -1,0 +1,74 @@
+{% extends "layoutAdmin.html" %}
+{% block title %}
+Air Whakatū Admin -Add A Flight
+{% endblock %}
+{% block content %}
+
+<div class="FormAddaflight FormAddaflight_position">
+<form action="/admin/staffpage/addAflight/process">
+    <h4> Add A Flight</h4>
+    <label for="flightNum">Flight Number:</label>
+    <select name="flightNum" id="flightNum" required>
+        {%for a in  dbresult_flightnum%}
+        <option value={{a[0]}}>{{a[1]}}</option>
+        {%endfor%}
+    </select>
+<br/>
+
+<label for="flightDate">Flight Date:</label>
+<input type="date" name="flightDate" id="flightDate" min="{{CurrentDate}}" required/><br/>
+
+<label for="scheduledDepTime">Scheduled Departure Time:</label>
+<input type="time" name="scheduledDepTime" id="scheduledDepTime" required/><br/>
+
+<label for="scheduledArrTime">Scheduled Arrival Time:</label>
+<input type="time" name="scheduledArrTime" id="scheduledArrTime" required/><br/>
+
+<label for="aircraft">Aircraft:</label>
+<select name="aircraft" id="aircraft" required>
+    {%for result in dbresult_regmark%}
+        {%for entry in result%}
+    <option value={{entry}}>{{entry}}</option>
+    {%endfor%}
+    {%endfor%}
+</select><br/>
+
+<label for="flightStatusDisplay">Status:</label>
+<input type="text" name="flightStatusDisplay" id="flightStatusDisplay" value="On time" disabled><br/>
+
+<input type="hidden" name="flightStatus" value="On time" ><br/>
+<div class="buttonback">
+    <button type="submit" value="submit" class="btn btn-primary">Add</button>
+</div>
+</form>
+</div>
+
+{%if dbresult_flightid_added%}
+<div class="container-fluid ">
+
+    <p class="successmessage">Flight added successfully!</p>
+    
+<fieldset>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                {%for q in dbcols_flightid_added%}
+                    <th>{{q}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for e in dbresult_flightid_added%}
+        <tr>
+            {%for w in e%}
+                <td>{{w}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</fieldset>
+{%endif%}
+
+
+{% endblock %}

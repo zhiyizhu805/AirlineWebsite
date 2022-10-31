@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block title %}
+Air Whakatū - Arrivals & Departures
+{% endblock %}
+{% block content %}
+
+
+
+<div class="jumbotron">
+    <div class="container text-center" >
+        <fieldset class="searchform">
+            <h2 class="title-arrdep">Arrivals & Departures</h2>
+            <form action="/ArrDep/process">
+                <label for="airport">Select airport:</lable>
+                <select name="airport" id="airport"  >
+                    {%for result_airport in dbresult_airport%}
+                    <option value="{{result_airport[0]}}"{%if airport_selected==result_airport[0]%}selected{%endif%}>{{result_airport[1]}}</option>
+                    {%endfor%}
+                </select>     
+                <button type="submit" value="submit" class="btn btn-primary">Continue</button>
+            </form>
+        </fieldset>
+    </div>
+  </div>
+
+{%if dbresult_Arr!=[] and dbresult_Dep!=[]%}
+<div class="container-fluid flightForms">
+{%if airport_selected %}
+    {%if dbresult_Arr or dbresult_Dep%}
+<fieldset>
+    <h2>Arrivals</h2>
+    <table class="table table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                {%for col in dbcols_Arr%}
+                    <th scope="col">{{col}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for result in dbresult_Arr%}
+        <tr>
+            {%for entry in result%}
+                <td>{{entry}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+    
+    <h2>Departures</h2>
+    <table class="table table-hover table-striped">
+        <thead class="table-light">
+            <tr>
+                {%for col in dbcols_Dep%}
+                    <th scope="col">{{col}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+    <tbody>
+        {%for result in dbresult_Dep%}
+        <tr>
+            {%for entry in result%}
+                <td>{{entry}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+
+        {% endif %}
+    
+    </tbody>
+    </table>
+</fieldset>
+
+{% endif %}
+
+</div>
+{%else%}
+
+<div class="notice errormessageOnlyColor">
+    <h5 >Sorry! We don't have Flight Schedules for {{airport_selected}} Airport.</h5>
+    <br/>
+    <br/>
+    <br/>
+</div>
+{%endif%}
+
+
+{% endblock %}
