@@ -1,6 +1,5 @@
 
 # My very First Full-Stack Personal Website
-
 ## Introduction
 
 This repository contains my first full-stack personal website which established in 2022, built at the beginning of my programming journey. As my maiden project, it was instrumental in laying the foundation for my subsequent group projects, where I was able to learn and improve further.
@@ -20,9 +19,21 @@ Here's how you can get started with this project:
 1. **Clone the Repository:** Use `git clone <repository-url>` to clone the project to your local machine.
 2. **Install Dependencies:** Navigate to the project folder and run `pip install -r requirements.txt` to install the required Python packages.
 3. **Start the Server:** Run `python app.py` to start the Flask server.
-4. **Access the Website:** Open your browser and navigate to `http://127.0.0.1:5000/` to access the website.
+4. **Access the Website:** Open your browser and navigate to `http://127.0.0.1:5000/`  `http://127.0.0.1:5000/admin` to access the website.
 
 ## Conclusion
 
 This project serves as a stepping stone for my programming career and a symbol of continuous learning and growth. Your feedback and suggestions are always welcome as they will help me to refine and enhance my skills further.
 
+## passenger page:
+<img  alt="Coding" width="400" src="display_pics/airline5.jpg">
+<img  alt="Coding" width="400" src="display_pics/airline1.jpg">
+<img  alt="Coding" width="400" src="display_pics/airline2.jpg">
+<img  alt="Coding" width="400" src="display_pics/airline3.jpg">
+<img  alt="Coding" width="400" src="display_pics/airline4.jpg">
+
+
+## admin page:
+<img  alt="Coding" width="400" src="display_pics/admin1.jpg">
+<img  alt="Coding" width="400" src="display_pics/admin2.jpg">
+<img  alt="Coding" width="400" src="display_pics/admin4.jpg">
